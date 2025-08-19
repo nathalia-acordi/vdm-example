@@ -54,8 +54,9 @@ O VDMJ é um interpretador para a linguagem VDM (Vienna Development Method) escr
   ```
 
 ### 4. Gerar Obrigações de Prova (POs)
-    * Para gerar proof obligations:
+   * Para gerar proof obligations:
   ```bash
  java -jar vdmj-4.6.0.jar -vdmsl -p CartSyst.vdmsl
   ```
+
 
