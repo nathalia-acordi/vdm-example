@@ -1,32 +1,60 @@
-﻿# vdm-example
-Exemplo de modelagem usando **VDM-SL (Vienna Development Method - Specification Language)**.  
-Este projeto implementa um sistema simples de **carrinho de compras**, demonstrando:
 
-- Definição de **tipos** e **estruturas** (`Product`, `CartSys`, etc.)
-- Uso de **invariantes** e **pré-condições** para garantir integridade
-- **Funções puras** (`Subtotal`, `Total`, `Sum`)
-- **Operações** que alteram o estado (`AddProduct`, `AddItem`, `RemoveItem`, etc.)
-- **Traces** que permitem simular cenários de teste
+# VDM Example - Cart System
+
+Este repositório contém um **exemplo em VDM-SL** (Vienna Development Method - Specification Language) para modelagem formal de um **sistema de carrinho de compras**.  
+O objetivo é demonstrar como usar especificações formais para garantir correção e consistência em sistemas simples.
+
+---
+
+## Estrutura
+- `CartSyst.vdmsl` → Especificação formal do sistema de carrinho
+- `README.md` → Documentação do projeto
 
 ---
 ## Como executar
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/nathalia-acordi/vdm-example.git
+### 1. Clone este repositório:
+ ```bash
+   git clone git@github.com:nathalia-acordi/vdm-example.git
    cd vdm-example
-   ```
-2. Instale o VDMJ
-O **VDMJ** é um interpretador para a linguagem VDM (Vienna Development Method) escrito em Java.
-- Acesse o repositório oficial: [https://github.com/nickbattle/vdmj](https://github.com/nickbattle/vdmj)
+  ```
+
+### 2. Verifique se você possui Java 8+ instalado:
+```bash
+  java -version
+  ```
+   
+### 3. Execute o arquivo `.vdmsl` com o **VDMJ** (ver instruções abaixo)
+
+---
+
+## Instale o VDMJ
+O VDMJ é um interpretador para a linguagem VDM (Vienna Development Method) escrito em Java.
+
+### 1. Baixar
+- Acesse o repositório oficial: https://github.com/nickbattle/vdm
 - Vá em **Releases** e baixe a versão mais recente
 
-É necessário ter o **Java** instalado
-- Para verificar:
+### 2. Executar
+
+- É necessário ter o **Java** instalado (Java 8 ou superior)
+- Para rodar o **VDMJ**:
+```bash
+  java -jar vdmj-4.6.0.jar -vdmsl CartsSyst.vdmsl
+  ```
+
+  ### 3. Usar 
+  * Comando para **type-checking**:
   ```bash
-  java -version
-   ```
-  Então, rode o VDMJ:
-   ```bash
-java -jar vdmj-4.6.0.jar -vdmsl SeuArquivo.vdmsl
-   ```
+  java -jar vdmj-4.6.0.jar -vdmsl -strict CartSyst.vdmsl
+  ```
+
+  * Comando para **executar operações** (modo interativo):
+  ```bash
+  java -jar vdmj-4.6.0.jar -vdmsl -i CartSyst.vdmsl
+  ```
+
+### 4. Gerar Obrigações de Prova (POs)
+    * Para gerar proof obligations:
+  ```bash
+ java -jar vdmj-4.6.0.jar -vdmsl -p CartSyst.vdmsl
+  ```
