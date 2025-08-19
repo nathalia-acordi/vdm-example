@@ -86,6 +86,19 @@ GetTotal();
   ```bash
  -- Total esperado: 100
   ```
+---
+## Referências
+
+- Jones, C. B. (1990). *Systematic Software Development Using VDM*. Prentice Hall.  
+  Disponível em: http://www.cs.ncl.ac.uk/publications/books/sd-using-vdm/
+
+- Fitzgerald, J., & Larsen, P. G. (2009). *Modelling Systems: Practical Tools and Techniques in Software Development*. Cambridge University Press.  
+  Disponível em: https://www.cl.cam.ac.uk/~mjcg/Teaching/ECAD+Arch/files/Modelling_Systems.pdf
+
+- VDMJ - Interpretador de VDM em Java.  
+  Repositório oficial: https://github.com/nickbattle/vdmj
+
+
 
 
 
