@@ -58,5 +58,18 @@ O VDMJ é um interpretador para a linguagem VDM (Vienna Development Method) escr
   ```bash
  java -jar vdmj-4.6.0.jar -vdmsl -p CartSyst.vdmsl
   ```
+--- 
+### 5. Exemplo de Execução (interativo no VDMJ)
+   * Adicionar comandos reais que o usuário pode digitar no interpretador:
+  ```bash
+ AddProduct(1, mk_Product("Camisa", 50));
+AddItem(1, 2);
+GetTotal();
+  ```
+
+   * E mostrar a saída esperada:
+  ```bash
+ -- Total esperado: 100
+  ```
 
 
