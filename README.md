@@ -39,7 +39,7 @@ O VDMJ é um interpretador para a linguagem VDM (Vienna Development Method) escr
 - É necessário ter o **Java** instalado (Java 8 ou superior)
 - Para rodar o **VDMJ**:
 ```bash
-  java -jar vdmj-4.6.0.jar -vdmsl CartsSyst.vdmsl
+  java -jar vdmj-4.6.0.jar -vdmsl CartSyst.vdmsl
   ```
 
   ### 3. Usar 
@@ -58,3 +58,4 @@ O VDMJ é um interpretador para a linguagem VDM (Vienna Development Method) escr
   ```bash
  java -jar vdmj-4.6.0.jar -vdmsl -p CartSyst.vdmsl
   ```
+
