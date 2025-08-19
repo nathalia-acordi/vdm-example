@@ -1,0 +1,122 @@
+types
+  Name = seq of char;
+  ProductId = nat1;
+
+  Product ::
+    name  : Name
+    price : nat
+
+state CartSys of
+  catalog : map ProductId to Product
+  cart    : map ProductId to nat
+
+inv mk_CartSys(catalog, cart) ==
+  (forall pid in set dom cart &
+      pid in set dom catalog and
+      cart(pid) > 0)
+  and
+  (forall pid in set dom catalog &
+      catalog(pid).price >= 0)
+
+init s ==
+  s = mk_CartSys({|->}, {|->})
+end
+
+functions
+  Subtotal : ProductId *
+             map ProductId to Product *
+             map ProductId to nat +> nat
+  Subtotal(pid, catalog, cart) ==
+    catalog(pid).price * cart(pid)
+  pre pid in set dom catalog and
+      pid in set dom cart;
+
+  Total : map ProductId to Product *
+          map ProductId to nat +> nat
+  Total(catalog, cart) ==
+    Sum([ catalog(pid).price * cart(pid) |
+         pid in set dom cart ]);
+
+  Sum : seq of nat +> nat
+  Sum(rs) ==
+    if rs = [] then 0
+    else hd rs + Sum(tl rs)
+  measure Len;
+
+  Len : seq of nat +> nat
+  Len(s) == len s;
+
+operations
+  AddProduct : ProductId * Product ==> ()
+  AddProduct(pid, p) ==
+    catalog := catalog munion { pid |-> p }
+  pre pid not in set dom catalog and
+      p.price >= 0;
+
+  SetQty : ProductId * nat ==> ()
+  SetQty(pid, q) ==
+    if q = 0
+    then
+      cart := {pid} <-: cart
+    else
+      cart := cart ++ { pid |-> q }
+  pre pid in set dom catalog;
+
+  AddItem : ProductId * nat1 ==> ()
+  AddItem(pid, q) ==
+    if pid in set dom cart
+    then
+      cart := cart ++ { pid |-> cart(pid) + q }
+    else
+      cart := cart ++ { pid |-> q }
+  pre pid in set dom catalog;
+
+  RemoveItem : ProductId * nat1 ==> ()
+  RemoveItem(pid, q) ==
+    let newq = cart(pid) - q in
+      if newq = 0
+      then cart := {pid} <-: cart
+      else cart := cart ++ { pid |-> newq }
+  pre pid in set dom cart and
+      q <= cart(pid);
+
+  ClearCart : () ==> ()
+  ClearCart() ==
+    cart := {|->};
+
+  GetTotal : () ==> nat
+  GetTotal() ==
+    return Total(catalog, cart);
+
+  ListItems : () ==> seq of
+              (ProductId * Name * nat * nat * nat)
+  ListItems() ==
+    return [ mk_(pid,
+                  catalog(pid).name,
+                  cart(pid),
+                  catalog(pid).price,
+                  catalog(pid).price * cart(pid))
+             | pid in set dom cart ];
+
+traces
+CadastroProdutos:
+  ( AddProduct(101, mk_Product("Arroz", 1899));
+    AddProduct(102, mk_Product("Feijao", 799)) );
+
+CompraSimples:
+  ( AddProduct(101, mk_Product("Arroz", 1899));
+    AddItem(101, 2);
+    GetTotal() );
+
+AtualizaRemove:
+  ( AddProduct(102, mk_Product("Feijao", 799));
+    AddItem(102, 3);
+    RemoveItem(102, 1);
+    GetTotal() );
+
+FluxoCompleto:
+  ( AddProduct(201, mk_Product("Macarrao", 599));
+    AddItem(201, 5);
+    ListItems();
+    ClearCart();
+    ListItems() );
