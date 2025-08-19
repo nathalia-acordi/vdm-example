@@ -1,8 +1,23 @@
 
 # VDM Example - Cart System
-
 Este repositório contém um **exemplo em VDM-SL** (Vienna Development Method - Specification Language) para modelagem formal de um **sistema de carrinho de compras**.  
 O objetivo é demonstrar como usar especificações formais para garantir correção e consistência em sistemas simples.
+
+---
+## Problema
+
+Modelar, em **VDM-SL**, um **carrinho de compras** com catálogo de produtos e um carrinho do usuário.  
+Utilize o **VDMJ** como ferramenta de execução e verificação.  
+
+### Requisitos Funcionais
+- **RF01:** Cadastrar produtos no catálogo (id, nome, preço em centavos)  
+- **RF02:** Adicionar, atualizar e remover itens no carrinho (quantidade inteira ≥ 0)  
+- **RF03:** Calcular o total do carrinho  
+- **RF04:** Listar itens do carrinho (nome, preço, quantidade, subtotal)  
+
+### Regras de Negócio
+- **RN01:** Preço do produto ≥ 0 (em centavos). Quantidades no carrinho > 0 quando chave existir  
+- **RN02:** Um item só pode estar no carrinho se existir no catálogo  
 
 ---
 
@@ -71,5 +86,6 @@ GetTotal();
   ```bash
  -- Total esperado: 100
   ```
+
 
 
